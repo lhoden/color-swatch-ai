@@ -56,8 +56,21 @@ app.post('/prompt', async (req, res) => {
     const receivedData = req.body;
 
     const mistralResponse = await askMistral(receivedData.prompt);
+    const text = mistralResponse.outputs[0].text;
 
-    res.status(200).json(mistralResponse);
+    let yes = JSON.stringify(text);
+    let leading = 0;
+    let description = "";
+    let hexCodesAndDescriptions = [];
+    for (let i = 0; i < 7; i++) {
+        leading = yes.indexOf("#", leading + 1);
+        description = yes.substring(leading + 9, yes.indexOf(".", leading));
+        hexCodesAndDescriptions.push({
+            hexCode: yes.substring(leading, leading + 7),
+            description: description
+        });
+    }
+    res.status(200).json(hexCodesAndDescriptions);
 });
 
 app.listen(port, () => {
