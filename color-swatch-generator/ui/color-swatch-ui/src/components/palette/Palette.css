@@ -9,15 +9,23 @@
 
 .color-swatch {
     height: 100%;
-    width: 90%;
+    width: 95%;
+    display: flex;
+    align-items: center;
 }
 
 .color-swatch-name {
     color: #000;
-    width: 10%;
+    width: 5%;
     height: 100%;
-    background: #fff;
-    border: 0.1em solid lightgrey;
-    border-top-left-radius: 1em;
-    border-bottom-left-radius: 1em;
+    background: #ffffff;
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+}
+
+.color-name {
+    font-weight: 600 !important;
+    color: #fff;
+    margin-left: auto !important;
+    margin-right: auto !important;
 }

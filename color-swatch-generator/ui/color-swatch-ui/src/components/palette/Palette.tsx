@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import './Palette.css';
 import nearestColor from 'nearest-color';
 import { colornames } from 'color-name-list';
-import {Tooltip} from '@mui/material';
+import {Tooltip, Typography} from '@mui/material';
 
 function Palette() {
   const [data, setData] = useState([]);
@@ -39,7 +39,7 @@ function Palette() {
                 <div className="color-swatch-name">{swatch.hexCode}</div>
                 <Tooltip title={swatch.description}>
                   <div className="color-swatch" style={{background: swatch.hexCode}}>
-                    {nearest(swatch.hexCode).name}
+                    <Typography variant="h4" className="color-name">{nearest(swatch.hexCode).name}</Typography>
                   </div>
                 </Tooltip>
             </div>
