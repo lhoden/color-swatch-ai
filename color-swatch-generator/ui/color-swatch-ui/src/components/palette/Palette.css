@@ -15,12 +15,14 @@
 }
 
 .color-swatch-name {
-    color: #000;
+    color: #595555;
     width: 5%;
     height: 100%;
     background: #ffffff;
     writing-mode: vertical-lr;
     text-orientation: mixed;
+    font-weight: bold;
+    font-size: 1.4em;
 }
 
 .color-name {

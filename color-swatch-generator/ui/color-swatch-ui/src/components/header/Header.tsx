@@ -4,13 +4,16 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import './Header.scss';
 
 const pages = ['API'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function Header() {
   return (
-    <div>Buttons here...</div>
+    <div>
+      <button className="raise">Raise</button>
+    </div>
   );
 }
 export default Header;
