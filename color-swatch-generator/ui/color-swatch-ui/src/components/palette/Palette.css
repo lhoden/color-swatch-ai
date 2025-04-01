@@ -5,6 +5,7 @@
 .palette {
     height: 15%;
     display: flex;
+    margin-bottom: 0.5em;
 }
 
 .color-swatch {
@@ -22,7 +23,7 @@
     writing-mode: vertical-lr;
     text-orientation: mixed;
     font-weight: bold;
-    font-size: 1.4em;
+    font-size: 1.1em;
 }
 
 .color-name {
