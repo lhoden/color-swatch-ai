@@ -32,7 +32,7 @@ function Palette() {
 
   const handleSubmit = () => {
     promptAI();
-    setOpen(false);
+    setLoading(true);
   }
 
   // nearestColor need objects {name => hex} as input
@@ -44,8 +44,8 @@ function Palette() {
     promptAI();
   }, []);
 
-  const promptAI = () => {
-    fetch("/ask-ai/prompt", {
+  const promptAI = async () => {
+    await fetch("/ask-ai/prompt", {
       method: "POST",
       headers: {
           "Content-Type": "application/json",
@@ -60,6 +60,8 @@ function Palette() {
             console.log('yay: ', data);
         }
     });
+    setLoading(false);
+    setOpen(false);
   }
 
   return (
@@ -77,8 +79,12 @@ function Palette() {
             <Typography id="modal-modal-title" variant="h6" component="h2">
               Describe your visual
             </Typography>
-            <Textarea minRows={2} variant="outlined" value={prompt} onChange={handlePromptChange}/>
-            <Button onClick={handleSubmit}>Go</Button>
+            <Textarea className="prompt-box" minRows={2} variant="outlined" value={prompt} onChange={handlePromptChange}/>
+            {loading ? (
+              <div>Loading...</div>
+            ) : (
+              <Button className="go-button" onClick={handleSubmit}>Send in Prompt ✨</Button>
+            )}
           </Box>
         </Modal>
         <div className="container">
