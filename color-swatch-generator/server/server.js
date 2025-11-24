@@ -3,6 +3,7 @@ const app = express();
 const axios = require('axios');
 const aws4Axios = require('aws4-axios');
 require('dotenv').config();
+const cors = require('cors');
 const port = 5000;
 
 // Create an interceptor instance with your AWS configuration
@@ -45,6 +46,7 @@ async function askMistral(prompt) {
 }
 
 app.use(express.json()); // for parsing application/json
+app.use(cors());
 
 app.get('/info', (req, res) => {
   // Handle GET request logic here

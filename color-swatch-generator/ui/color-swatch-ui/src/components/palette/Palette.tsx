@@ -49,7 +49,7 @@ function Palette() {
   }, []);
 
   const promptAI = async () => {
-    await fetch("/ask-ai/prompt", {
+    await fetch("http://52.14.75.223:5000/prompt", {
       method: "POST",
       headers: {
           "Content-Type": "application/json",
