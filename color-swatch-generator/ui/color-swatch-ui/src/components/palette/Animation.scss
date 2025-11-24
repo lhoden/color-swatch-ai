@@ -97,7 +97,7 @@ $colors: (
 @each $button, $color in $colors {
   .#{$button} {
     --color: #{$color};
-    --hover: #{adjust-hue($color, 45deg)};
+    // --hover: #{adjust-hue($color, 45deg)};
   }
 }
 

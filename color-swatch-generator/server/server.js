@@ -24,7 +24,8 @@ client.interceptors.request.use(interceptor);
 // signing requests
 async function askMistral(prompt) {
     const requestBody = {
-        prompt: `<s>[INST] ${prompt} [/INST]`,
+        // prompt: `<s>[INST] ${prompt} [/INST]`,
+        prompt: `<|begin_of_text|><|start_header_id|>user<|end_header_id|>${prompt}<|eot_id|><|start_header_id|>assistant<|end_header_id|>`,
         max_tokens: "400",
         temperature: "0.5",
         top_p: "0.9",

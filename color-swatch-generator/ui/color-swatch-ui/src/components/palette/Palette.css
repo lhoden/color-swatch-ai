@@ -47,3 +47,9 @@
     color: #fff !important;
     font-weight: 700 !important;
 }
+
+.title {
+    position: absolute;
+    left: 2em;
+    color: #4b4b4b;
+}

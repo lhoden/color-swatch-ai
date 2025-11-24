@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
 import './Palette.css';
-import nearestColor from 'nearest-color';
-import { colornames } from 'color-name-list';
+import { GetColorName } from 'hex-color-to-color-name';
 import './Animation.scss';
-import { Box, Button, Modal, Typography, Tooltip } from '@mui/material';
+import { Box, Button, Modal, Typography, Snackbar } from '@mui/material';
 import Textarea from '@mui/joy/Textarea';
 
 const style = {
@@ -25,6 +24,7 @@ function Palette() {
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const [prompt, setPrompt] = useState('');
+  const [snackBar, setSnackbar] = useState(false);
 
   const handlePromptChange = (event: any) => {
     setPrompt(event.target.value);
@@ -35,10 +35,14 @@ function Palette() {
     setLoading(true);
   }
 
-  // nearestColor need objects {name => hex} as input
-  const colors = colornames.reduce((o: any, a: any) => Object.assign(o, { [a.name]: a.hex }), {});
+  const handleCopy = (swatchColor: string) => {
+    navigator.clipboard.writeText(swatchColor);
+    setSnackbar(true);
+  }
 
-  const nearest = nearestColor.from(colors);
+  const handleClose = () => {
+    setSnackbar(false);
+  }
 
   useEffect(() => {
     promptAI();
@@ -50,7 +54,7 @@ function Palette() {
       headers: {
           "Content-Type": "application/json",
       },
-      body: JSON.stringify({ "prompt": `Can you output a color palette with seven hex codes that would visually describe the following scene: '${prompt ? prompt : 'It is a beautiful fall October day.'}'`}),
+      body: JSON.stringify({ "prompt": `Can you output a color palette with seven hex codes that would visually describe the following scene: '${prompt ? prompt : 'It is a rainbow unicorn paradise.'}'`}),
     })
     .then(async (r) => {
         setLoading(false);
@@ -64,9 +68,12 @@ function Palette() {
     setOpen(false);
   }
 
+  console.log('hmmm:', data);
+
   return (
     <>
       <div style={{height: '5em'}}>
+        <h2 className="title">AI Color Palette Maker</h2>
         <button className="raise" onClick={() => {setOpen(true)}}>Generate</button>
       </div>
       <Modal
@@ -87,15 +94,22 @@ function Palette() {
             )}
           </Box>
         </Modal>
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          open={snackBar}
+          onClose={handleClose}
+          autoHideDuration={3000}
+          message="Copied hex code!"
+        />
         <div className="container">
           {(data.map((swatch: any) => (
-            <div className="palette">
+            <div className="palette" onClick={() => {handleCopy(swatch.hexCode)}}>
                 <div className="color-swatch-name">{swatch.hexCode}</div>
-                <Tooltip title={swatch.description}>
+                {/* <Tooltip title={swatch.description}> */}
                   <div className="color-swatch" style={{background: swatch.hexCode}}>
-                    <Typography variant="h4" className="color-name">{nearest(swatch.hexCode).name}</Typography>
+                    <Typography variant="h4" className="color-name">{GetColorName(swatch.hexCode.slice(1))}</Typography>
                   </div>
-                </Tooltip>
+                {/* </Tooltip> */}
             </div>
           )))}
         </div>
