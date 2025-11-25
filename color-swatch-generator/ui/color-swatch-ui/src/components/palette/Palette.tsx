@@ -74,6 +74,7 @@ function Palette() {
     <>
       <div style={{height: '5em'}}>
         <h2 className="title">AI Color Palette Maker</h2>
+        <h2 className="mobile-icon">✨</h2>
         <button className="raise" onClick={() => {setOpen(true)}}>Generate</button>
       </div>
       <Modal

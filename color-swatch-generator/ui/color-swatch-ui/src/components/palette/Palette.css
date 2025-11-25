@@ -53,3 +53,27 @@
     left: 2em;
     color: #4b4b4b;
 }
+
+.mobile-icon {
+    display: none;
+}
+
+@media screen and (max-width: 550px) {
+    .title {
+        display: none !important;
+    }
+    .mobile-icon {
+        position: absolute;
+        left: 2em;
+        display: block;
+    }
+    .color-swatch-name {
+        width: 15% !important;
+    }
+    .color-swatch h4 {
+        font-size: 1.5em;
+    }
+    .MuiBox-root {
+        width: 260px !important;
+    }
+}
